@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+{% for user in lesUsers %}
+    <div class="card" style="width: 18rem;">
+
+        <div class="card-body">
+            <h5 class="card-title">{{ user.username }}</h5>
+            <p class="card-text">{{ user.email }}@email.fr</p>
+            <a href="{{ path("show_user" , {id:user.id}) }}" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+{{ form_start (formulaire) }}
+    {{ form_row (formulaire.username) }}
+    {{ form_row (formulaire.email) }}
+    {{ form_row (formulaire.password) }}
+    {{ form_row (formulaire.passwordConfirm) }}
+    <button type="submit" class="btn btn-primary">envoyer</button>
+    {{ form_end (formulaire) }}
+{% endblock %}

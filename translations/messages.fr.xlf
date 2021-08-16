@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="g0KJ6ww" resname="supprimer">
+        <source>supprimer</source>
+        <target>supprimer</target>
+      </trans-unit>
+      <trans-unit id="6JrheoE" resname="le plus récent">
+        <source>le plus récent</source>
+        <target>le plus récent</target>
+      </trans-unit>
+      <trans-unit id="Q7epPo." resname="le moins récent">
+        <source>le moins récent</source>
+        <target>le moins récent</target>
+      </trans-unit>
+      <trans-unit id="yNMjfgW" resname="le plus urgent">
+        <source>le plus urgent</source>
+        <target>le plus urgent</target>
+      </trans-unit>
+      <trans-unit id="c_kVGRJ" resname="le moins urgent">
+        <source>le moins urgent</source>
+        <target>le moins urgent</target>
+      </trans-unit>
+      <trans-unit id="Créer un todo" resname="Créer un todo">
+                                             <source>Créer un todo</source>
+                                             <target>Crée un todo</target>
+                                           </trans-unit>
+       <trans-unit id="se deconnecter" resname="se deconnecter">
+                   <source>se deconnecter</source>
+                       <target>se deconnecter</target>
+                      </trans-unit>
+    </body>
+  </file>
+</xliff>

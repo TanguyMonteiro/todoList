@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <div class="card" style="width: 18rem;">
+
+        <div class="card-body">
+            <h5 class="card-title">{{ unUser.username }}</h5>
+            <p class="card-text">{{ unUser.email }}@email.fr</p>
+            <a href="{{ path("admin_delete_user" , {id:unUser.id}) }}" class="btn btn-danger">Supprimer cet user</a>
+        </div>
+    </div>
+    {% for todo in lesTodos %}
+        <div class="card" style="width: 18rem;">
+            <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
+            <div class="card-body">
+
+                <p class="card-text">{{ todo.description }}</p>
+                <p>{{ todo.dueDate | date('Y-m-d H:i:s')}}</p>
+                <p>{{ todo.createdAt | date('Y-m-d H:i:s') }}</p>
+                <p>pour : </p> <p>{{ todo.user.username }}</p>
+                <a href="{{ path("admin_delete_todo" , {id:todo.id}) }}" class="btn btn-danger">Supprimer ce todo</a>
+
+            </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}

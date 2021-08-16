@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TodoController!{% endblock %}
+
+{% block body %}
+    <a class="btn btn-success" href="{{ path("todo_sorted" , {param: "mostRecent"}) }}">{{ "le plus récent" | trans }}</a>
+    <a class="btn btn-success" href="{{ path("todo_sorted" , {param: "lessRecent"}) }}">{{ "le moins récent" | trans }}</a>
+    <a class="btn btn-success" href="{{ path("todo_sorted" , {param: "mostUrgent"}) }}">{{ "le plus urgent" | trans }}</a>
+    <a class="btn btn-success" href="{{ path("todo_sorted" , {param: "leastUrgent"}) }}">{{ "le moins urgent" | trans }}</a>
+    <a class="btn btn-primary" href="{{ path('create_todo') }}">{{"Créer un todo" | trans}}</a>
+    {% if app.user.roles == ['ROLE_ADMIN','ROLE_USER'] %}
+        <a href="{{ path('admin') }}" class="btn btn-warning">ADMIN</a>
+    {% endif %}
+<br>
+    <p class="checkUser">{{ app.user.getChecks|length }}</p>/{{ app.user.getTodos|length }}
+
+
+
+    <div class="d-flex">
+    {% for todo in lesTodos %}
+
+        <div class="card" style="width: 18rem;">
+
+            <div class="card-body">
+
+                <p class="card-text">{{ todo.description }}</p>
+                <p>{{ todo.dueDate | date('Y-m-d H:i:s')}}</p>
+                <p>{{ todo.createdAt | date('Y-m-d H:i:s') }}</p>
+               <p>pour : </p> <p>{{ todo.user.username }}</p>
+
+
+
+                <a class="btn btn-success check" href="{{ path("check_todo", {id:todo.id}) }}">
+                    <strong>
+                        <span class="checked"> {% if todo.checked %} C'est fait
+                            {% else %} C'est pas fait
+                            {% endif %}
+                        </span>
+                    </strong>
+                </a>
+
+
+
+
+
+
+
+
+                <a class="btn btn-danger" href="{{ path("delete_todo", {id:todo.id}) }}">{{ "supprimer" | trans }}</a>
+            </div>
+        </div>
+
+    {% endfor %}
+    </div>
+    <div class="navigation d-flex justify-content-center">
+        {{ knp_pagination_render(lesTodos , "@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig") }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    <script>
+
+        function cliquePourChecker(event){
+            event.preventDefault();
+            let url = this.href;
+
+            let maRequete = new XMLHttpRequest();
+            maRequete.open('GET', url)
+
+            maRequete.onload = ()=> {
+
+
+                let data = JSON.parse(maRequete.responseText);
+
+                let texteSpan = "";
+                let nombreChecks = data.nombreDeChecks;
+                if(data.message =='checked'){
+                    texteSpan = "C'est fait";
+                } else if (data.message =="unchecked"){
+                    texteSpan = "c'est pas fait";
+                }
+                this.querySelector('.checked').innerHTML = texteSpan
+                this.querySelector(".checkUser").innerHTML = nombreChecks
+            }
+            maRequete.send()
+        };
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+        const tousMesBoutons = document.querySelectorAll('.check');
+            tousMesBoutons.forEach((bouton)=>{
+                bouton.addEventListener('click', cliquePourChecker)
+            })
+    })
+
+
+    </script>
+
+{% endblock %}
